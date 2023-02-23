@@ -6,6 +6,7 @@ import SearchBox from '../src/Components/Search-Component/Search';
 import {ChangeEvent} from 'react';
 import { useState } from 'react';
 import CardCatagory from '../src/Components/Card-Component/Card-catagory';
+import { Console } from 'console';
 
 
 export type DataAccess = {
@@ -29,14 +30,34 @@ function App() {
   
   const [SearchField, setSearchField]= useState('');
   const [Users, setUsers] = useState<DataAccess[]>([]);
+  const [newUsers, setNewUsers] = useState<DataAccess[]>([]);
   // const []
 
+
+
+  
   useEffect(()=>{
-    fetch('https://randomuser.me/api/?results=15').then((data)=>{
+
+    let input = SearchField.toLowerCase();
+    let newUser= Users.filter((item)=>{
+       return item.name.toLowerCase().includes(input);
+    })
+
+    setNewUsers(newUser)
+console.log(input)
+  },[SearchField,Users])
+
+
+
+  console.log('This is new U',newUsers)
+  // console.log(SearchField)
+
+  useEffect(()=>{
+    fetch('https://randomuser.me/api/?results=55').then((data)=>{
       return data.json();
     }).then((data)=>{
   
-      console.log(data.results)
+      // console.log(data.results)
 
      let user:DataAccess[] = data.results.map((info:any)=>{
 
@@ -50,10 +71,7 @@ function App() {
           cell: info.cell,
           Picture: pic
         }
-    
-
-       
-        
+ 
       })
       setUsers(user)
       // 
@@ -74,7 +92,7 @@ function App() {
     )
   },[])
 
-  // console.log(Users)
+
 
 
 
@@ -92,7 +110,7 @@ function App() {
 
     
       <SearchBox type='Search' txtHolder='Search Users' className='searchbox' changeON={ChangeHandler} ></SearchBox>
-      <CardCatagory user={Users}/>
+      <CardCatagory user={newUsers}/>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-
+import './search.scss'
 type Inputs = {
     type: string,
     txtHolder: string,

@@ -1,24 +1,25 @@
 import {DataAccess} from '../../App'
 import Card from '../Card-Slide/Card-Slide';
+import './catagory.scss'
 type userType ={
     user: DataAccess[]
     
 }
 const CardCatagory = ({user}:userType)=>{
 
-    console.log('from Card',user)
+    
  
     return(
-        <div>
+        <div    className='cardCatagory'>
           
 
             {
 
-                user.map((singlItem)=>(
+                user.map((singlItem, index)=>(
                  
 
 
-                    <Card  singlItems={singlItem}/>
+                    <Card key={index} singlItems={singlItem}/>
                 )
 
 
