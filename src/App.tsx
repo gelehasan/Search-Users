@@ -19,13 +19,6 @@ export type DataAccess = {
   Picture: string
 }
 
-// type pictures= {
-//   medium: string
-// }
-// type NameObject = {
-//   first: string,
-//   last: string
-// }
 function App() {
   
   const [SearchField, setSearchField]= useState('');
@@ -44,20 +37,17 @@ function App() {
     })
 
     setNewUsers(newUser)
-console.log(input)
   },[SearchField,Users])
 
 
 
   console.log('This is new U',newUsers)
-  // console.log(SearchField)
+ 
 
   useEffect(()=>{
     fetch('https://randomuser.me/api/?results=55').then((data)=>{
       return data.json();
     }).then((data)=>{
-  
-      // console.log(data.results)
 
      let user:DataAccess[] = data.results.map((info:any)=>{
 
@@ -74,20 +64,8 @@ console.log(input)
  
       })
       setUsers(user)
-      // 
-      
-
-      // const users: DataAccess[] = data.results.map((info: DataAccess) => {
-      //   return {
-      //     name: `${info.name.first} ${info.name.last}`,
-      //     gender: info.gender,
-      //     email: info.email,
-      //     cell: info.cell,
-      //   };
-      // });
-      
-      // setUsers(users);
-      
+ 
+   
     }
     )
   },[])
